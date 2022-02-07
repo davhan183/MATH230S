@@ -1,0 +1,193 @@
+\documentclass[12pt]{article}
+
+\usepackage{color}
+%\input{rgb}
+%----------Packages----------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsrefs}
+\usepackage{dsfont}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+	\usetikzlibrary{matrix}
+\usepackage[all]{xy}
+\usepackage[mathcal]{eucal}
+\usepackage{verbatim}  %%includes comment environment
+\usepackage{fullpage}  %%smaller margins
+%----------Commands----------
+
+%%penalizes orphans
+\clubpenalty=9999
+\widowpenalty=9999
+
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+
+\renewcommand{\phi}{\varphi}
+
+\renewcommand{\emptyset}{\O}
+
+\providecommand{\abs}[1]{\lvert #1 \rvert}
+\providecommand{\norm}[1]{\lVert #1 \rVert}
+
+
+\providecommand{\ar}{\rightarrow}
+\providecommand{\arr}{\longrightarrow}
+
+\renewcommand{\_}[1]{\underline{ #1 }}
+
+
+\DeclareMathOperator{\ext}{ext}
+
+
+
+%----------Theorems----------
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+
+\newtheorem{axiom}{Axiom}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{warning}[theorem]{Warning}
+
+
+\numberwithin{equation}{subsection}
+
+
+%----------Title-------------
+
+
+\begin{document}
+
+
+\begin{center}
+{\large MATH/STAT 230S, SCRIPT 4: INDEPENDENT EVENTS} \\ 
+\vspace{.2in}  
+
+\end{center}
+
+% % % % % The counter sets us as having completed section 3. So we'll start this script on section 4 (since it's the fourth script)
+
+\setcounter{section}{3}
+
+
+
+\section{Independent Events}
+Conditional probabilities define independent events. Heuristically, events are independent if knowledge of one event does not impact the probability of the other.
+\begin{definition}
+Two events $A$ and $B$ are \emph{independent} if $\bbP(A)=\bbP(A|B)$, or $\bbP(B)=\bbP(B|A)$, or $\bbP(A\cap B)=\bbP(A)\bbP(B)$
+\end{definition}
+
+\begin{example}
+The events of getting heads on a coin toss and a 6 in a fair 6-sided die are independent. However, the events of drawing an Ace from a standard deck of cards and then the drawing another Ace from the same deck, without replacements, are dependent.
+\end{example}
+
+\begin{definition}
+Three events, $A$, $B$, and $C$ are \emph{independent} or \emph{mutually independent}. If both of following hold
+  \begin{enumerate}
+    \item $A$ and $B$ are independent: \[\bbP(B|A)=\bbP(B|A^c)=\bbP(B)\]
+     
+     \item $C$ does not depend on the occurrence of $A$ or $B$: \[\bbP(C)=\bbP(C|A\cap B)=\bbP(C|A^c\cap B)=\bbP(C|A\cap B^c)\]
+     \end{enumerate}
+     Alternately, you can check that three events are independent by checking both of the following
+     \begin{enumerate}
+     \item All three events are pairwise independent (any two you pick are independent).
+     \item $\mathbb{P}(A\cap B\cap C)=\mathbb{P}(A)\mathbb{P}(B)\mathbb{P}(C)$
+  \end{enumerate}
+\end{definition}
+    If three events are independent, then the following multiplication rule applies:
+  
+    \begin{theorem}
+      (Multiplication Rule for Three Independent Events)
+      \[\bbP(A\cap B\cap C)=\bbP(A)\bbP(B)\bbP(C)\]
+    \end{theorem}
+
+  \begin{example}
+    Given we are rolling a fair 6-sided twice, let $A$ be the event that you roll a 1 on the first die, $B$ be the event that you roll a 2 on the first die, and $C$ be the event that you roll a sum of 0 where
+    \begin{align*}
+      \bbP(A)&=\frac{1}{6} \\
+      \bbP(B)&=\frac{1}{6} \\
+      \bbP(C)&=\frac{0}{36}=0 \\
+      \bbP(A\cap B\cap C)&=\bbP(A)\bbP(B)\bbP(C) \\
+        &=\frac{1}{6}\cdot \frac{1}{6}\cdot 0 = 0
+    \end{align*}
+    This demonstrates that the multiplication rule does not imply independence as $\bbP(A\cap B\cap C)$ is 0 as rolling a sum of 0 is . \\
+  \end{example}
+
+	\begin{example}
+	Let $\Omega$ be an outcome space associated to rolling one die twice. Let $A$ be the event that the first roll is even. Let $B$ be the event that the second roll is even. Let $C$ be the event that the sum of the rolls is $7$.\\
+	Are these three events (mutually) independent? Are they \textit{pairwise} independent? (pairwise independence means $A$ and $B$ are independent, $A$ and $C$ and independent, and $B$ and $C$ are independent)
+		\begin{proof}[Solution]
+		%insert your solution
+    Given
+    \begin{center}
+      $\Omega=\Bigg\{$
+      \begin{tabular}{ c c c c c c } 
+        11, & 12, & 13, & 14, & 15, & 16, \\
+        21, & 22, & 23, & 24, & 25, & 26, \\
+        31, & 32, & 33, & 34, & 35, & 36, \\
+        41, & 42, & 43, & 44, & 45, & 46, \\
+        51, & 52, & 53, & 54, & 55, & 56, \\
+        61, & 62, & 63, & 64, & 65, & 66
+      \end{tabular}
+      $\Bigg\}$ \\
+    \end{center}
+    \begin{align*}
+      \bbP(A)&=\frac{18}{36}=\frac{1}{2} \\
+      \bbP(B)&=\frac{18}{36}=\frac{1}{2} \\
+      \bbP(C)&=\frac{6}{36}=\frac{1}{6} \\
+      \bbP(A\cap B\cap C)&=\bbP(A)\bbP(B)\bbP(C) \\
+        &=\frac{1}{2}\cdot \frac{1}{2}\cdot \frac{1}{6}=\frac{1}{24} \neq \frac{0}{36}
+    \end{align*}
+    As such, events A, B, and C are not mutually independent. \\
+    \begin{align*}
+      \bbP(A|B)&=\frac{9}{18}=\frac{1}{2}=\bbP(A) \\
+      \bbP(C|A)&=\frac{3}{18}=\frac{1}{6}=\bbP(C) \\
+      \bbP(C|B)&=\frac{3}{18}=\frac{1}{6}=\bbP(C)
+    \end{align*}
+    Thus, A, B, and C are all pairwise independent.
+		\end{proof}
+	\end{example}
+	
+\end{document}

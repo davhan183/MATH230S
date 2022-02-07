@@ -1,0 +1,355 @@
+\documentclass[12pt]{article}
+
+\usepackage{color}
+%\input{rgb}
+%----------Packages----------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsrefs}
+\usepackage{dsfont}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+	\usetikzlibrary{matrix}
+\usepackage[all]{xy}
+\usepackage[mathcal]{eucal}
+\usepackage{verbatim}  %%includes comment environment
+\usepackage{fullpage}  %%smaller margins
+\usepackage{multirow}
+\usepackage{soul}
+%----------Commands----------
+
+%%penalizes orphans
+\clubpenalty=9999
+\widowpenalty=9999
+
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+
+\renewcommand{\phi}{\varphi}
+
+\renewcommand{\emptyset}{\O}
+
+\providecommand{\abs}[1]{\lvert #1 \rvert}
+\providecommand{\norm}[1]{\lVert #1 \rVert}
+
+
+\providecommand{\ar}{\rightarrow}
+\providecommand{\arr}{\longrightarrow}
+
+\renewcommand{\_}[1]{\underline{ #1 }}
+
+
+\DeclareMathOperator{\ext}{ext}
+
+
+
+%----------Theorems----------
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+
+\newtheorem{axiom}{Axiom}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{warning}[theorem]{Warning}
+
+
+\numberwithin{equation}{subsection}
+
+
+%----------Title-------------
+
+
+\begin{document}
+
+
+\begin{center}
+{\large MATH/STAT 230S, SCRIPT 5: RANDOM VARIABLES} \\ 
+\vspace{.2in}  
+
+\end{center} 
+
+
+\setcounter{section}{4}
+
+
+     
+\section{Random Variables}
+
+
+\begin{example}
+	Experiment: Rolling a pair of dice 
+	\begin{eqnarray*}
+		\Omega &=&\text{all possible outcomes of rolling a pair of dice}\\
+		X&=&\text{the sum of the two dice}\\
+		Y&=&\text{the product of the two dice}\\
+		Z&=&\text{the minimum of the two dice}
+	\end{eqnarray*}
+	$X$, $Y$, and $Z$ are functions.\\
+	\begin{enumerate}
+		\item The domain of $X$ is \_{$1 \leq X \leq 6$}. The range of $X$ is \_{$12 - 2 = 10$}
+		\item The domain of $Y$ contains \_{$36$} elements. The range of $Y$ is \_{$1 \leq Y \leq 36$}
+	\end{enumerate}
+\end{example}
+
+\begin{definition}
+	A \emph{random variable} is a function defined on an outcome space $\Omega$ that assigns each outcome a real number. That is, if $X$ is the name of the random variable and $s$ is a possible outcome in the sample space, then $X(s)$ is a real number. A \emph{discrete random variable} has an outcome space that is finite or countably infinite (like the integers).
+\end{definition}
+
+\begin{example}
+	Experiment: Flip a fair coin three times \\
+	Given heads is 1 and tails is 0, some examples of random variables are the following
+	\begin{align*}
+		A&=\text{the sum of the three coin flips} \\
+		B&=\text{the product of the three coin flips} \\
+		C&=\text{the minimum of the three coin flips}
+	\end{align*}
+	Some examples of events in the other hand are the following
+	\begin{align*}
+		D&=\text{getting one heads} \\
+		E&=\text{getting all heads} \\
+		F&=\text{getting all tails}
+	\end{align*}
+\end{example}
+
+\begin{definition}
+	Let $X$ be a random variable with finitely many range values. The \textbf{mass function} of $X$ is the function that gives the probability of each possible value of $X$. The mass function is \[p(x):=\mathbb{P}(X=x).\] To represent the mass function, you can plot it, list it as a table, or write it as a function. 
+\end{definition}
+
+\begin{example}
+	Teams play a game. Each team gets 36 tokens to distribute between the numbers 2 through 12. Once all teams have chosen distributions, the host will roll two dice. If the sum of the rolls is a number where the team has placed a token, they may remove one token from that number. The winning team is the first team to remove all 36 of their tokens. What is the best way to distribute the 36 tokens?
+	\begin{proof}[Solution]
+		The best way to distribute the tokens are by placing 18 tokens on 2 and 18 tokens on 12. Given X is the random variable equal to the sum of the two dice rolls and $p(x)=\bbP(X=x)$, 
+		\begin{align*}
+			p(2)&=p(12)=\frac{1}{36} &
+			p(3)&=p(11)=\frac{2}{36} &
+			p(4)&=p(10)=\frac{3}{36} & \\
+			p(5)&=p(9)=\frac{4}{36} &
+			p(6)&=p(8)=\frac{5}{36} & 
+			p(7)&=\frac{6}{36}
+		\end{align*}
+		Meaning 2 and 12 are the best numbers to bet on as they have the least likelihood of being rolled and thus the best way to maximize keeping the team's tokens.
+	\end{proof}
+\end{example}
+
+\begin{definition}
+	A \emph{probability distribution} is a function that describes the probabilities of all events in an outcome space. A probability mass function completely describes a distribution.
+\end{definition}
+
+\begin{notation}
+	Let $X$ be a random variable and $B$ an event in the \textit{range} of $X$ (so $B$ is some set of real numbers). 
+	\[\mathbb{P}(X\in B)=\sum_{x\in B} \mathbb{P}(X=x)\]
+	The symbol $\in$ means ``is an element of."
+\end{notation}
+
+
+\begin{example}
+	Let $X$ be the number of heads out of 100 (fair) coin flips. Let event $A=\{2,3\}$. Compute $\mathbb{P}(X\in A)$.
+	\begin{proof}[Solution]
+	%insert solution
+	\begin{align*}
+		\bbP(X\in A)&=\sum_{x\in A} \bbP(X=x) \\
+			&=\bbP(X=2)+\bbP(X=3) \\
+			&=\frac{1}{2^{100}}\left({100\choose 2}+{100\choose 3}\right)=\frac{1}{2^{100}}\left(4950+161700\right)=\frac{166650}{2^{100}}
+	\end{align*}
+	\end{proof}
+\end{example} 
+
+\subsection{Functions of Random Variables}
+
+\begin{definition}
+	Two random variables are \emph{independent} if \[ \bbP(X=x, Y=y)=\bbP(X=x)\bbP(Y=y)\hspace{1cm} \text{ for all } x \text{ and } y\]
+	Or equivalently
+	\[ \bbP(X=x | Y=y)=\bbP(X=x)\hspace{1cm} \text{ for all } x \text{ and } y\]
+\end{definition}
+
+\begin{example}
+	Experiment: Rolling a pair of dice \\
+	An example of independent random variables are the following
+	\begin{align*}
+		A&=\text{the value of the first die} \\
+		B&=\text{the value of the second die} 
+	\end{align*}
+	An example of dependent random variables on the other hand are the following
+	\begin{align*}
+		C&=\text{the number of even dice rolls} \\
+		D&=\text{the number of odd dice rolls}
+	\end{align*}
+\end{example}
+
+\begin{remark}
+	Let $X$ be a random variable. We can create a new random variable $Y$ as a function of $X$. In this case, $X$ and $Y$ are often dependent. We could define functions like $Y=X^2$, $Y=|X-50|$, or $Y=13X-X^2+\ln(X+1)$. Each of these is a new random variable.
+\end{remark}
+
+\begin{example}
+Let $X$ be the number of heads out of 100 coin tosses. \\
+If we define $Y$ to be $100-X$, we find the distribution of $Y$ to be the same as $X$ given the fact ${n\choose k}={n\choose n-k}$ or specifically ${100\choose k}={100\choose 100-k}$. \\
+\begin{align*}
+	\bbP(X=k)&=\bbP(100-X=100-k) \\
+	&=\bbP(Y=100-k)=\frac{1}{2^{100}}{100 \choose k}  \\
+	&=\bbP(Y=k)=\frac{1}{2^{100}}{100 \choose 100-k} 
+\end{align*}
+\end{example}
+
+\begin{theorem}\label{functions}
+	Let $X$ be a discrete random variable, and $Y=f(X)$. The probability mass function of $Y$ is
+	\[\bbP(Y=y)=\sum_{x \text{ with } f(x)=y}\bbP(X=x)\]
+\end{theorem} 
+
+\begin{proof}[Proof of thm \ref{functions}.]
+	%Insert your proof
+	\begin{align*}
+		\bbP(Y=y)&=\bbP(f(X)=y) \\
+			&=\sum_{x:f(x)=y}\bbP(X=x)
+	\end{align*}
+\end{proof}
+
+\begin{remark}
+	Two random variables $X$ and $Y$ are equal if both random variables output the same value for each element of the outcome space. Suppose you roll two dice. $X=$ number on the first die. $Y=$ number on the second die. Do $X$ and $Y$ have the same distribution? Are $X$ and $Y$ equal? \ul{As the random variables $X$ and $Y$ are dependent on the number rolled on a die, they have the same distribution, specifically $\frac{1}{6}$ for all possible values for $X$ and $Y$. However, as they are dependent on different dices, $X$ and $Y$ are not equal on all outcomes $s$ of the outcome space $\Omega$.}
+\end{remark}
+
+\subsection{Joint Distributions}
+
+
+\begin{definition}
+	The \emph{joint distribution} of two random variables gives the probability of all possible pairs of outcomes. So, the joint distribution of $X$ and $Y$ is a list of (or description of) the probabilities $\bbP(X=x\text{ and } Y=y)$ for all possible pairs $(x,y)$. It is often helpful to express the joint distribution as a table/grid.
+\end{definition}
+
+
+\begin{example} Several examples of joint distributions
+	\begin{enumerate}
+		\item Two dice are rolled. $X$ is the value of the first die, $Y$ is the value of the second. What is the joint distribution of $X$ and $Y$? \\
+		\begin{center}
+			\begin{tabular}{ c | c | c | c | c | c | c | }
+				& 1 & 2 & 3 & 4 & 5 & 6 \\
+				\hline
+				1 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 \\
+				\hline
+				2 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 \\
+				\hline
+				3 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 \\
+				\hline
+				4 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 \\
+				\hline
+				5 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 \\
+				\hline
+				6 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 & 1/6 \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		\item Two coins are flipped. Given heads is 1 and tails is 0, $X$ is the sum of the two flips, $Y$ is the value of the second flip. The joint distribution of $X$ and $Y$ is \\
+		\begin{center}			
+			\begin{tabular}{ c | c | c | c | }
+				& 0 & 1 & 2 \\
+				\hline
+				0 & 1/4 & 1/4 & 0/4 \\
+				\hline
+				1 & 0/4 & 1/4 & 1/4 \\
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{enumerate}
+\end{example}
+
+\begin{definition} 
+	The \emph{marginal distribution} of a random variable $X$, is the probability mass function of $X$. The mass function is called the marginal distribution of $X$ when it is calculated from the joint distribution of $X$ with another random variable (because the calculation can be done by summing rows/columns and writing the results in the margins of the joint distribution table).
+\end{definition} 
+
+\begin{example}
+	By taking the sum of the columns and rows respectively from the above joint distribution table, we can determine the marginal distribution of the random variables X and Y.
+	\begin{center}
+		\begin{tabular}{ c | c | c | c | c }
+			& 0 & 1 & 2 & Total \\
+			\hline
+			0 & 1/4 & 1/4 & 0/4 & 2/4 \\
+			\hline
+			1 & 0/4 & 1/4 & 1/4 & 2/4 \\
+			\hline
+			Total & 1/4 & 2/4 & 1/4 & 4/4 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\begin{align*}
+		P(X=0)&=\frac{1}{4} \\
+		P(X=1)&=\frac{2}{4}=\frac{1}{2} \\
+		P(X=2)&=\frac{1}{4} \\
+		P(Y=0)&=\frac{2}{4}=\frac{1}{2} \\
+		P(Y=1)&=\frac{2}{4}=\frac{1}{2}
+	\end{align*}
+\end{example}
+
+\begin{theorem}\label{marginals} (Marginal distribution)
+	\[\bbP(X=x)=\sum_{\text{all }y}\bbP(X=x,Y=y)\]
+\end{theorem}
+
+\begin{proof}[Proof of theorem \ref{marginals}.]
+	Summing all the $P(X=x,Y=y)$ for all values of $y$ is equivalent to taking the sum of a column where $X=x$ in a marginal distribution table.
+\end{proof}
+
+
+\begin{definition}
+	Several random variables are mutually (collectively) independent if \[ \bbP(X_1=x_1,X_2=x_2,\dots X_n=x_n)=\prod_{i=1}^{n}\bbP(X=x_i)\hspace{1cm} \text{ for all } x_i\]
+\end{definition}
+
+\begin{example}
+ 	Let
+	\begin{align*}
+		X&=\text{even numbers} \\
+		Y&=\text{\#s above 2}
+	\end{align*}
+	The random variables above are mutually independent.
+\end{example}
+
+\begin{theorem} (Consequences of independence)
+	\begin{enumerate}
+		\item Any subgroup of independent variables are also independent
+		\item Functions of independent random variables are also independent\\ Example: If $X_1$ and $X_2$ are independent, then $2X_1$ and $X_2+3$ are also independent
+		\item Functions of collections disjoint collections of independent random variables are also independent\\
+		Example: If $X_1, X_2, X_3, X_4$ are independent, then $min(X_1,X_2)$ and $max(X_3,X_4)$ are also independent.
+	\end{enumerate}
+\end{theorem}
+
+
+
+\end{document}

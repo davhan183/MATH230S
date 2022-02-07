@@ -1,0 +1,12 @@
+\documentclass{article}
+\usepackage{pdfpages}
+\usepackage{pgffor}
+
+\begin{document}
+% \includepdf[pages={1-2}]{../s1.pdf}
+
+\foreach \i in {5,...,6} {
+    \includepdf[pages=-]{../s\i}
+}
+
+\end{document}

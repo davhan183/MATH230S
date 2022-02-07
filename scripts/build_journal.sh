@@ -1,0 +1,2 @@
+cd journal
+latexmk -pdf 

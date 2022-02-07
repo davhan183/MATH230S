@@ -1,0 +1,274 @@
+\documentclass[12pt]{article}
+
+\usepackage{color}
+%\input{rgb}
+%----------Packages----------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsrefs}
+\usepackage{dsfont}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+	\usetikzlibrary{matrix}
+\usepackage[all]{xy}
+\usepackage[mathcal]{eucal}
+\usepackage{verbatim}  %%includes comment environment
+\usepackage{fullpage}  %%smaller margins
+%----------Commands----------
+
+%%penalizes orphans
+\clubpenalty=9999
+\widowpenalty=9999
+
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+
+\renewcommand{\phi}{\varphi}
+
+\renewcommand{\emptyset}{\O}
+
+\providecommand{\abs}[1]{\lvert #1 \rvert}
+\providecommand{\norm}[1]{\lVert #1 \rVert}
+
+
+\providecommand{\ar}{\rightarrow}
+\providecommand{\arr}{\longrightarrow}
+
+\renewcommand{\_}[1]{\underline{ #1 }}
+
+
+\DeclareMathOperator{\ext}{ext}
+
+
+
+%----------Theorems----------
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+
+\newtheorem{axiom}{Axiom}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{warning}[theorem]{Warning}
+
+
+\numberwithin{equation}{subsection}
+
+
+%----------Title-------------
+
+
+\begin{document}
+
+\begin{center}
+{\large MATH/STAT 230S, SCRIPT 2: Foundations of Probability} \\ 
+\vspace{.2in}  
+
+\end{center}
+% % % % % The counter sets us as having completed section 1. So we'll start this script on section 2 (since it's the second script)
+\setcounter{section}{1}
+% % % % %
+
+\section{Foundations of Probabilty}
+\begin{definition} The following 4 definitions will be foundational to our study of probability.
+	\begin{itemize}
+		\item An \emph{experiment} is a well-defined procedure.
+		\item The \emph{outcome space} or \emph{sample space} is a set of all possible outcomes of the experiment. We will typically use the notation $\Omega$ to represent this set of events
+		\item An \emph{event} is a subset of possible outcomes.
+		\item The \emph{probability} of an event $A$ is denoted $\mathbb{P}(A)$. When all events in an outcome space are equally likely, $\mathbb{P}(A)=\dfrac{\#(A)}{\#(\Omega)}$
+	\end{itemize}
+\end{definition}
+
+\begin{example} Apply the definitions in the following example.
+	\begin{enumerate}
+		\item Experiment: You flip a fair coin two times.
+		\item Outcome space: All of the following are outcome spaces.
+			\begin{itemize}
+			\item  $\Omega =\{0\, heads, 1\, head, 2\, heads\}$
+			\item  $\Omega =\{TT, TH, HT, HH\}$
+			\item $\Omega =\{ 0\, tails, 1\, tail, 2\, tails\}$
+			\end{itemize}
+		\item Non-example: The following are NOT outcome spaces.
+			\begin{itemize}
+			\item $\{1\, head, 2\, heads\}$ (does not cover all possible outcomes)
+			\item $\{0\, heads, 1\, head, 2\, heads, 0\, tails, 1\, tail, 2\, tails \}$ (contains repetitive outcomes)
+			\end{itemize}
+		\item Event: You flip at least one head.
+		\item Probability: What is the likelihood if you flip a fair coin twice, that the coin will land on heads at least once? Let $A$ be the event of flipping at least one head. What is $\bbP(A)$?\\ In the outcome space with equally likely outcomes ($\Omega =\{TT, TH, HT, HH\}$) there are 3 elements in event $A$. So, $$\bbP(A)=\dfrac{\#(A)}{\#(\Omega)}=\dfrac{3}{4}.$$
+	\end{enumerate}
+\end{example}
+
+\begin{example}
+Apply the definitions in the following example.
+% Write your own examples to go with the experiment.
+\begin{enumerate}
+    \item Experiment: Rolling a fair 6-sided die twice.
+    \item Outcome space: $\Omega =\{2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12\}$
+    \item Events: You roll a sum equal to 12.
+    \item Probability: What is the likelihood if you roll a fair 6-sided die twice, that you roll a sum equal to 12? Let $A$ be the event of rolling a 12. What is $\bbP(A)$? \\
+		\[\bbP(A)=\frac{\text{\# of ways to roll a 12}}{\text{\# of ways to roll a 6-sided die twice}}=\frac{1}{36}\]
+    As there is only one way to roll a 12 by rolling two 6s in a row and there are 36 possible ways to roll a fair 6-sided die twice (6 possible number of ways to roll a dice on the second roll for each of the 6 possible outcomes of the first roll or 6 $\cdot$ 6).
+\end{enumerate}
+\end{example}
+
+\begin{definition}
+	The \emph{relative frequency} of event $A$ out of $n$ observations is denoted $\bbP_n(A)$. \\
+	The relative frequency is computed as $\bbP_n(A)=\dfrac{\# \text{ of observations of event }A}{n}$.\\
+\end{definition}
+
+\begin{example}
+	Let $A$ be flipping heads on a single coin flip. You flip a coin 15 times. What is $\bbP\left(\bbP_{15}(A)=\dfrac{1}{2}\right)$?
+		\begin{proof}[Solution] 
+		%insert your soltuion here
+		As flipping a coin is a binary outcome, a relative frequency of event $A$ out of 15 observations will be a distinct multiple of $\frac{1}{15}$. As $\frac{1}{2}$ is not a multiple of $\frac{1}{15}$, the probability of the relative frequency being $\frac{1}{2}$ will be 0.
+		\end{proof}
+\end{example}
+
+\begin{remark}
+	In the ``frequency" interpretation of probability, the probability of an event $A$ is $\bbP(A)=\lim\limits_{n\to\infty}\bbP_n(A)$. This applies well to things like flipping coins and drawing cards - experiments that can be easily repeated with the same conditions. \\
+	An alternate interpretation of probability is the ``degree of belief" interpretation. In this sense, probability measures confidence in an opinion. This can apply to things like the probability that a particular candidate wins a particular election (that's an experiment that is difficult to repeat with the same conditions).
+\end{remark}
+
+\begin{example}
+ % Insert example(s) of degree of belief type statements. What about relative frequency type statements
+ Let $A$ be rolling a 6 on a single 6-sided die. You roll this this dice 6 times. If you rolled a 6 two times, what is the relative frequency of $A$?
+	\begin{proof}[Solution] 
+	%insert your soltuion here
+	$\bbP_{6}(A)=\dfrac{2}{6}=\dfrac{1}{3}$
+	\end{proof}
+What is the absolute probability of $A$?
+	\begin{proof}[Solution] 
+	%insert your soltuion here
+	\[\lim_{n\to \infty}\bbP_n(A)=\bbP(A)=\frac{1}{6}\]
+	\end{proof}
+\end{example}
+
+\begin{notation} We will use the following notation to make our writing more concise.
+	\begin{itemize}
+ 		\item $\cap$: For two events $A$ and $B$, the overlap or intersection of $A$ and $B$ is written as $A\cap B$. This is also written as ``$A$ and $B$." \\
+ 		 Example - A fair 6-sided die is rolled. $A$ is the event of rolling an even number. $B$ is the event of rolling a number greater than 3. Then $A\cap B$ is \_{4,6}
+ 		 \item $\cup$: For two events $A$ and $B$, the union of $A$ and $B$ is written as $A\cup B$. This is also written as ``$A$ or $B$." This includes all events in $A$ and in $B$ and in both.\\
+ 		 Example - A fair 6-sided die is rolled. $A$ is the event of rolling an even number. $B$ is the event of rolling a number greater than 3. Then $A\cup B$ is \_{2,4,5,6}
+ 		 \item  $\emptyset$: The empty set, or the set of no outcomes is $\emptyset$. $\bbP(\emptyset)=0$.
+ 		 \item $A^c$: The complement of $A$ or the opposite of $A$ is written as $A^c$. The complement includes all the outcomes that are not in $A$.
+ 	\end{itemize}
+\end{notation}
+
+\begin{theorem} Useful Equations for Calculations
+	\begin{enumerate}
+	\item $\bbP(\Omega)=\_{1}$ for an outcome space $\Omega$. 
+	\item $\_{0}\leq\bbP(B)\leq \_{1}$ for any event $B$.
+	\item Addition rule for disjoint sets: If $B_1\cap B_2=\emptyset$, then $\bbP(B_1\cup B_2)=\bbP(B_1)+\bbP(B_2)$.\\
+	\item Inclusion-Exclusion: $\bbP(A\cup B)=\bbP(A)+\bbP(B)-\bbP(A\cap B)$
+		\begin{proof}
+		% Include your explanation of this rule
+		Given $A$ is $(A\cap B^C)\cup (A\cap B)$, using the addition rule for disjoint sets, 
+		\begin{align*}
+			\bbP(A)&=\bbP((A\cap B^C)\cup (A\cap B)) \\
+				&=\bbP(A\cap B^C)+\bbP(A\cap B)
+		\end{align*}
+		Likewise, by switching events $A$ and $B$, we can get that for $B$:
+		\begin{align*}
+			\bbP(B)&=\bbP(B\cap A^C)+\bbP(B\cap A)
+		\end{align*}
+		By then solving for $\bbP(A\cap B^C)$ and $\bbP(B\cap A^C)$, we get
+		\begin{align*}
+			\bbP(A\cap B^C)&=\bbP(A)-\bbP(A\cap B) \\
+			\bbP(B\cap A^C)&=\bbP(B)-\bbP(A\cap B)
+		\end{align*}
+		Now, given the event $A\cup B$ is $(A\cap B^C)\cup (B\cap A^C)\cup (A\cap B)$ or the three disjoint parts of a Venn diagram of two events, by using the disjoint sets as before and then substituting the equations above, we get
+		\begin{align*}
+			\bbP(A\cup B)&=\bbP((A\cap B^C)\cup (B\cap A^C)\cup (A\cap B)) \\
+				&=\bbP(A\cap B^C)+\bbP(B\cap A^C)+\bbP(A\cap B) \\
+				&=\bbP(A)-\bbP(A\cap B)+\bbP(B)-\bbP(A\cap B)+\bbP(A\cap B) \\
+				&=\bbP(A)+\bbP(B)-\bbP(A\cap B)
+		\end{align*}
+		\end{proof}
+	\item Complement rule: $\bbP(A^c)=1-\bbP(A)$
+		\begin{proof}
+		% Include your explanation of this rule
+		$\bbP(A)+\bbP(A^c)=1=\bbP(\Omega)$
+		\end{proof}
+	\item Multiplication rule for independent events: $\mathbb{P}(B\cap A)=\mathbb{P}(B)\mathbb{P}(A)$	
+	\end{enumerate}
+\end{theorem}		
+
+\begin{example}
+ % Write ans solve one or more example problems incorporating these formulas
+Given that there are 10 cats and dogs in total where 3 are male cats and 3 are dogs with 2 of them being female, what is the probability one randomly chosen pet is a cat or a male?
+\begin{proof}[Solution.]
+	Let $M$ be the event of picking a male pet, $C$ be the event of picking a cat, and $D$ be that for dogs out of 10 pets. \\
+	Given
+	\begin{align*}		
+		\bbP(C\cap M)&=\frac{3}{10} \\
+		\bbP(D)&=\frac{3}{10} \\
+		\bbP(D\cap M^C)&=\frac{2}{10}
+	\end{align*}
+	Using the complement rule, we can determine that 
+	\begin{align*}
+		\bbP(C)&=1-\bbP(C^C) \\
+			&=1-\bbP(D) \\
+			&=1-\frac{3}{10}=\frac{7}{10} \\ \\
+		\bbP(D \cap M)&=1-\bbP(D \cap M)^C \\
+			&=1-(\bbP(D\cap M^C)+\bbP(C)) \\
+			&=1-
+				\left(
+					\frac{2}{10}+\frac{7}{10} 
+				\right)
+			=\frac{1}{10}
+	\end{align*}
+	Using the addition rule for disjoint sets, given that there can't be a male pet that is both a cat and a dog, we can then determine that
+	\begin{align*}
+		\bbP(M)&=\bbP((C\cap M)\cup (D\cap M)) \\
+			&=\bbP(C\cap M)+\bbP(D\cap M) \\
+			&=\frac{3}{10}+\frac{1}{10}=\frac{4}{10}
+	\end{align*}
+	Using the Inclusion-Exclusion rule, we can determine the probability of a random pet being a cat or a male to be: 
+	\begin{align*}
+		\bbP(C\cup M)&=\bbP(C)+\bbP(M)-\bbP(C\cap M) \\
+			&=\frac{7}{10}+\frac{4}{10}-\frac{3}{10}=\frac{8}{10}
+	\end{align*}
+\end{proof}
+\end{example}
+
+\end{document}
